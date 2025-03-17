@@ -1,0 +1,38 @@
+image:
+  repository: rabbitmq-update-definitions
+  tag: latest
+  pullPolicy: IfNotPresent
+
+securityContext:
+  enable: false
+
+jobName: rabbitmq-update-definitions
+backoffLimit: 1
+activeDeadLineSeconds: 360
+
+env:
+  public:
+    RMQ_OBJECT: 'users, queues, vhosts, exchanges, policies, bindings, permissions'
+    RMQ_HOST: rmqhost.local
+    RMQ_UPDATE_DEFINITIONS: true
+    RMQ_COMPARE_INFORMATION: true
+    RMQ_PATH_TO_DEFINITIONS_JSON_FILE: /etc/definitions/definitions.json
+    RMQ_LOGGING_LEVEL: INFO
+    RMQ_GET_ENV_FROM_OS: true
+    RMQ_PORT: 15671
+  secret:
+    RMQ_USER: rabbit
+    RMQ_PASSWORD: 123
+
+resources:
+  limits:
+    cpu: 100m
+    memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+
+jobAnnotations:
+  "helm.sh/hook": post-install,post-upgrade
+  "helm.sh/hook-weight": "-5"
+  "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded

@@ -1,0 +1,16 @@
+"parameters": [
+#{
+#  "value": {
+#    "src-uri": "amqp://localhost",
+#    "src-queue": "source",
+#    "dest-uri": "amqp://localhost",
+#    "dest-queue": "destination",
+#    "add-forward-headers": false,
+#    "ack-mode": "on-confirm",
+#    "delete-after": "never"
+#  },
+#  "vhost": "/",
+#  "component": "shovel",
+#  "name": "test"
+#}
+]

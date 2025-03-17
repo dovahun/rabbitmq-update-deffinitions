@@ -1,0 +1,11 @@
+"exchanges": [
+  {
+    "name": "foo",
+    "vhost": "/",
+    "type": "direct",
+    "durable": true,
+    "auto_delete": false,
+    "internal": false,
+    "arguments": {}
+  }
+]

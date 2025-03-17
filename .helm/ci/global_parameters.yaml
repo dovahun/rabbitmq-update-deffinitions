@@ -1,0 +1,6 @@
+"global_parameters": [
+#{
+#  "name": "cluster_name",
+#  "value": "rabbitmq-ha"
+#}
+]

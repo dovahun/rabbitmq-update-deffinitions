@@ -1,0 +1,10 @@
+"bindings" : [
+  {
+    "source": "foo",
+    "vhost": "/",
+    "destination": "foo-in",
+    "destination_type": "queue",
+    "routing_key": "",
+    "arguments": {}
+  }
+]

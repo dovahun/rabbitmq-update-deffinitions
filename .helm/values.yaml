@@ -1,0 +1,36 @@
+image:
+  repository: rabbimq-update-definitions
+  tag: 1.3.0
+  pullPolicy: IfNotPresent
+
+jobName: rabbitmq-update-definitions
+backoffLimit: 1
+
+securityContext:
+  enable: false
+
+definitionsSource: definitions.json
+
+env:
+  public: {}
+  secret: {}
+
+resources: {}
+
+activeDeadlineSeconds:
+
+jobAnnotations: {}
+
+nodeSelector: {}
+affinity: {}
+tolerations: {}
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health
+    port: http
+
+readinessProbe:
+  httpGet:
+    path: /actuator/health
+    port: http

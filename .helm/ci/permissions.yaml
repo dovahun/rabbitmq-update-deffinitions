@@ -1,0 +1,9 @@
+"permissions": [
+  {
+    "user": "rabbit",
+    "vhost": "/",
+    "configure": ".*",
+    "write": ".*",
+    "read": ".*"
+  }
+]

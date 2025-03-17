@@ -1,0 +1,7 @@
+"users": [
+  {
+    "name": "rabbit",
+    "password": "123",
+    "tags": "management"
+  }
+]
