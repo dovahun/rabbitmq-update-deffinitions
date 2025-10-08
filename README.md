@@ -13,6 +13,7 @@
     ├── Dockerfile
     ├── schema.json
     ├── .dockerignore
+    ├── .gitignore
     ├── main.go
     ├── go.mod
     ├── create_definitions.sh
