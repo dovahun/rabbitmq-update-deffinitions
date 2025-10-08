@@ -1,0 +1,67 @@
+{
+  "bindings": [
+    {
+      "arguments": {},
+      "destination": "foo-in00000aa",
+      "destination_type": "exchange",
+      "routing_key": "",
+      "source": "foo",
+      "vhost": "/"
+    }
+  ],
+  "exchanges": [
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "internal": false,
+      "name": "foo-in00000aa",
+      "type": "direct",
+      "vhost": "/"
+    }
+  ],
+  "global_parameters": [],
+  "parameters": [],
+  "permissions": [
+    {
+      "configure": ".*",
+      "read": ".*",
+      "user": "rabbit",
+      "vhost": "/",
+      "write": ".*"
+    }
+  ],
+  "policies": [
+    {
+      "definition": {
+        "ha-mode": "all",
+        "ha-sync-batch-size": 1,
+        "ha-sync-mode": "automatic"
+      },
+      "name": "ha-all",
+      "pattern": ".*",
+      "vhost": "/"
+    }
+  ],
+  "queues": [
+    {
+      "arguments": {},
+      "auto_delete": false,
+      "durable": true,
+      "name": "foo-in00000",
+      "vhost": "/"
+    }
+  ],
+  "users": [
+    {
+      "name": "rabbit",
+      "password": "123",
+      "tags": "management"
+    }
+  ],
+  "vhosts": [
+    {
+      "name": "/"
+    }
+  ]
+}

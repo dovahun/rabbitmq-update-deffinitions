@@ -1,0 +1,126 @@
+{
+  "title": "RabbitMQ Configuration Schema",
+  "type": "object",
+  "required": ["bindings", "exchanges", "queues", "users", "vhosts"],
+  "properties": {
+    "bindings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["destination", "destination_type", "source", "vhost", "arguments", "routing_key"],
+        "properties": {
+          "arguments": { "type": "object" },
+          "destination": { "type": "string" },
+          "destination_type": { "type": "string", "enum": ["queue", "exchange"] },
+          "routing_key": { "type": "string" },
+          "source": { "type": "string" },
+          "vhost": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "exchanges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "vhost", "durable", "auto_delete", "internal", "arguments"],
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string", "enum": ["direct", "topic", "fanout", "headers"] },
+          "vhost": { "type": "string" },
+          "durable": { "type": "boolean" },
+          "auto_delete": { "type": "boolean" },
+          "internal": { "type": "boolean" },
+          "arguments": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "queues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "vhost", "durable", "auto_delete", "arguments"],
+        "properties": {
+          "name": { "type": "string" },
+          "vhost": { "type": "string" },
+          "durable": { "type": "boolean" },
+          "auto_delete": { "type": "boolean" },
+          "arguments": { "type": "object" },
+          "type": {"type": "string"}
+        },
+        "additionalProperties": false
+      }
+    },
+    "users": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "password", "tags"],
+        "properties": {
+          "name": { "type": "string" },
+          "password": { "type": "string" },
+          "tags": { "type": "string","enum": ["management", "policymaker", "monitoring", "administrator", "impersonator", "none"] }
+        },
+        "additionalProperties": false
+      }
+    },
+    "permissions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["user", "vhost", "configure", "read", "write"],
+        "properties": {
+          "user": { "type": "string" },
+          "vhost": { "type": "string" },
+          "configure": { "type": "string" },
+          "read": { "type": "string" },
+          "write": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "policies": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "vhost", "pattern", "definition"],
+        "properties": {
+          "name": { "type": "string" },
+          "vhost": { "type": "string" },
+          "pattern": { "type": "string" },
+          "definition": {
+            "type": "object",
+            "properties": {
+              "ha-mode": { "type": "string" },
+              "ha-sync-batch-size": { "type": "integer" },
+              "ha-sync-mode": { "type": "string" }
+            },
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "vhosts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name"],
+        "properties": {
+          "name": { "type": "string" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "global_parameters": {
+      "type": "array",
+      "items": { "type": "object" }
+    },
+    "parameters": {
+      "type": "array",
+      "items": { "type": "object" }
+    }
+  },
+  "additionalProperties": false
+}
