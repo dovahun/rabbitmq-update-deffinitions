@@ -1,36 +1,41 @@
 # RABBITMQ-UPDATE-DEFINITIONS
 
-___
+## Made on Golang v1.24.7
 
-### *Значения ENV*
+### Example structure
+    nexus-repost-state/
+    ├── .bin/
+    │   └── rabbitmq-update-definitions
+    ├── src/
+    │   ├── config.go
+    │   ├── validate.go
+    │   └── workWithApi.go
+    ├── Dockerfile
+    ├── schema.json
+    ├── .dockerignore
+    ├── .gitignore
+    ├── main.go
+    ├── go.mod
+    ├── create_definitions.sh
+    └── README.md
 
-| ENV                               | Обьяснение                                                                                         |
-|:----------------------------------|:---------------------------------------------------------------------------------------------------|
-| RMQ_HOST                          | Имя хоста rabbitmq                                                                                 |
-| RMQ_PORT                          | Номер порта для подключения к API RabbitMQ, обычно это-`15671 `                                    | 
-| RMQ_USER                          | Пользователь с правами администратора                                                              |
-| RMQ_PASSWORD                      | Пароль от пользователя который указан для RMQ_USER                                                 |
-| RMQ_PATH_TO_DEFINITIONS_JSON_FILE | Указать `/путь/до/файла/с/дефинишинами.json`                                                       |
-| RMQ_OBJECT                        | Перечислить какие объекты в RabbitMQ будут проверены, например: `'queues, users, vhosts'` и тд     |
-| RMQ_UPDATE_DEFINITIONS            | Обновлять ли дефинишины true(да)/false(нет)                                                        |
-| RMQ_COMPARE_INFORMATION           | Сравнивать ли данные объектов из RMQ_OBJECT с объектами из файла с дефинишинами и данными с хоста  |
-| RMQ_GET_ENV_FROM_OS               | Наличие этого ENV означает что переменные окружения будут браться ОС а не из файла `.env`          |
+###  *Flags*
+| Flags                   | Descripition                                             |
+|:------------------------|:---------------------------------------------------------|
+| -file                   | Path to deffinition file                                 |
+| -host                   | Host api url for RabbitMQ with endpoint /api/definitions | 
+| -user                   | User for basic auth to RabbitMQ                          |
+| -password               | Password for user                                        |
+| -update                 | Run update definitions                                   |
+| -validate               | Run validate definitions file                            |
 
-___
 
-### *requirements*
-**Разработано на  python версии 3.10, для других версий не протестировано.**
+### How to build
 
-Перед запуском необходимо сделать следующее:
-1) Добавить переменные окружения либо через файл `.env` либо через **CLI**.
-2) Создать файл с дефинишинами.
-3) Установить необходимые зависимости из *requirements.txt*, выполнив команду: `pip install -r /путь/до/requirements.txt`
+go build .
 
-___
-
-### *Как запустить*
-
-`python main.py`
+### Example run
+go run . -file ./definitions -host http://127.0.0.1:15672/api/definitions -user admin -password admin -update -validate 
 
 
 

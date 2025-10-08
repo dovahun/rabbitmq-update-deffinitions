@@ -1,23 +1,18 @@
-FROM docker.repo-ci.sfera.inno.local/gdcr-docker/docker-base-images/python:3.10.4
-
-ENV TZ=Europe/Moscow
-
-ARG req=requirements.txt
-ARG NEXUS_CI_USERNAME
-ARG NEXUS_CI_PASSWORD
-ARG PULL_CI_REGISTRY
+FROM golang:1.24-alpine AS build
 
 WORKDIR app
 
-COPY . .
+COPY . ./
 
-RUN pip3 install --upgrade pip \
-    --index-url "https://${NEXUS_CI_USERNAME}:${NEXUS_CI_PASSWORD}@sfera.inno.local/app/repo-ci-misc/api/repository/gdcr-pypi/simple"\
-    --trusted-host "sfera.inno.local"
+RUN go build -o main main.go
 
-# Install requirements
-RUN pip3 install -r $req \
-    --index-url "https://${NEXUS_CI_USERNAME}:${NEXUS_CI_PASSWORD}@sfera.inno.local/app/repo-ci-misc/api/repository/gdcr-pypi/simple"\
-    --trusted-host "sfera.inno.local"
+FROM alpine:3.22 AS run
 
-ENTRYPOINT ["python3", "main.py"]
+WORKDIR /app
+
+COPY --from=build /go/app/main .
+COPY --from=build /go/app/schema.json .
+
+RUN chmod +x main
+
+ENTRYPOINT ["/app/main"]
