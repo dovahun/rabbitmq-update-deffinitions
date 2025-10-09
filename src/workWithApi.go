@@ -1,6 +1,7 @@
 package src
 
 import (
+	"crypto/tls"
 	"log/slog"
 	"net/http"
 	"os"
@@ -22,7 +23,19 @@ func WorkWithApi(rmqPathToFile string, rmqUrl string, rmqPass string, rmqUser st
 	// авторизация Basic
 	req.SetBasicAuth(rmqUser, rmqPass)
 
-	client := &http.Client{}
+	tlsConfig := &tls.Config{
+		InsecureSkipVerify: true, // <- отключает проверку (ОПАСНО)
+	}
+
+	// Транспорт с нашим tlsConfig
+	transport := &http.Transport{
+		TLSClientConfig: tlsConfig,
+	}
+
+	// Клиент, который использует этот транспорт
+	client := &http.Client{
+		Transport: transport,
+	}
 
 	resp, err := client.Do(req)
 	if err != nil {
