@@ -32,10 +32,9 @@
 
 ### How to build
 
-go build .
+`go build .`
 
 ### Example run
-go run . -file ./definitions -host http://127.0.0.1:15672/api/definitions -user admin -password admin -update -validate 
-
+`go run . -file ./definitions -host http://127.0.0.1:15672/api/definitions -user admin -password admin -update -validate `
 
 
